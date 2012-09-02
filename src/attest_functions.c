@@ -29,7 +29,6 @@ void attest_run()
   attest_test_result_t result;
   for(; test != test_end; ++test)
   {
-    attest_run_test(test, &result);
     if (!current_suite || strcmp(test->suite_name, current_suite)) {
       if (current_suite) {
         printf("--> %s: %u tests, %u failed\n\n", current_suite,
@@ -38,6 +37,7 @@ void attest_run()
       current_suite = test->suite_name;
       memset(&current_suite_results, 0, sizeof(attest_result_set_t));
     }
+    attest_run_test(test, &result);
     ++current_suite_results.num_tests;
     ++total_results.num_tests;
     if (result.error_code) {
