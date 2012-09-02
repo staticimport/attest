@@ -15,7 +15,7 @@ extern unsigned ATTEST_NEXT_TEST_INFO_INDEX;
   static void attest_bootstrap_test_##suitename##_##testname() __attribute__((constructor)); \
   static void attest_test_##suitename##_##testname(); \
   void attest_bootstrap_test_##suitename##_##testname() { \
-    attest_test_info_t* info = ATTEST_TEST_INFOS[ATTEST_NEXT_TEST_INFO_INDEX++]; \
+    attest_test_info_t* info = &(ATTEST_TEST_INFOS[ATTEST_NEXT_TEST_INFO_INDEX++]); \
     info->suite_name = #suitename; \
     info->test_name = #testname; \
     info->test_function = &attest_test_##suitename##_##testname; \
