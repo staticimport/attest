@@ -30,7 +30,7 @@ void attest_run()
   for(; test != test_end; ++test)
   {
     attest_run_test(test, &result);
-    if (strcmp(test->suite_name, current_suite)) {
+    if (!current_suite || strcmp(test->suite_name, current_suite)) {
       if (current_suite) {
         printf("--> %s: %u tests, %u failed\n\n", current_suite,
                current_suite_results.num_tests, current_suite_results.num_failed);
