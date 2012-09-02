@@ -1,7 +1,7 @@
 
 # Environment
 CC         = gcc
-EXEC_DIR   = bin
+EXEC_DIR   = lib
 OBJECT_DIR = build
 
 # Compilation Flags
@@ -32,7 +32,7 @@ clean:
 	rm -rf $(EXEC_DIR)/* $(OBJECT_DIR)/*
 
 main_init:
-	@mkdir -p $(MAIN_OBJECT_DIRS)
+	@mkdir -p $(MAIN_OBJECT_DIRS) $(dir MAIN_TARGET_LIBRARY)
 
 $(MAIN_TARGET_LIBRARY): $(MAIN_OBJECTS)
 	@mkdir -p $(dir $(MAIN_TARGET_LIBRARY))
