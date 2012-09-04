@@ -10,7 +10,7 @@ unsigned ATTEST_NEXT_TEST_INFO_INDEX = 0;
 
 static int attest_run_test(attest_test_info_t* test);
 
-void attest_run()
+void attest_all()
 {
   attest_test_info_t* test = ATTEST_TEST_INFOS;
   attest_test_info_t* test_end = ATTEST_TEST_INFOS + ATTEST_NEXT_TEST_INFO_INDEX;
