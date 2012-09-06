@@ -1,6 +1,8 @@
 #ifndef H_ATTEST_CHECKS_H
 #define H_ATTEST_CHECKS_H
 
+#include <stdio.h>
+
 #define ATTEST_TEST_ERROR_TEXT_LIMIT 512
 
 typedef struct attest_test_error {
@@ -24,11 +26,12 @@ void attest_clear_test_errors();
           if (!passed) { \
             attest_test_error_t* error = attest_add_test_error(); \
             if (error) { \
-              snprintf(error->test, ATTEST_TEST_ERROR_TEXT_LIMIT, \
-                       "FAIL: %s(expected=%s, actual=%s)", check_name, expected, actual); \
+              snprintf(error->text, ATTEST_TEST_ERROR_TEXT_LIMIT, \
+                       "FAIL: %s(expected=%s, actual=%s) at %s:%d", \
+                       check_name, expected, actual, __FILE__, __LINE__); \
             } \
           } \
-        } while(false)
+        } while(0)
 
 #define ATTEST_EQ(expected, actual) \
         ATTEST_CHECK_(#expected, #actual, "ATTEST_EQ", ((expected) == (actual)))
