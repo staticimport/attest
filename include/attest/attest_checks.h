@@ -50,6 +50,25 @@ void attest_clear_test_errors();
 #define ATTEST_FALSE(x) \
         ATTEST_CHECK_("0", #x, "ATTEST_GTE", (!(x)))
 
+#define ATTEST_INT_CHECK_(expected, actual, check_name, check) \
+        do { \
+          typeof(expected) exp_ = (expected); \
+          typeof(actual) act_ = (actual); \
+          if (!(exp_ check act_)) { \
+            attest_test_error_t* error = attest_add_test_error(); \
+            if (error) { \
+              sprintf(error->test, ATTEST_TEST_ERROR_TEXT_LIMIT, \
+                      "FAIL: %s(expected \"%s\" = %lld, actual \"%s\" = %lld) at %s:%d", \
+                      check_name, #expected, (long long int)exp_, (long long int)act_, \
+                      __FILE__, __LINE__); \
+            } \
+          } \
+        } while (0)
+
+#define ATTEST_INT_EQ(expected, actual) \
+        ATTEST_INT_CHECK_(expected, actual, "ATTEST_INT_EQ", ==)
+#define ATTEST_INT_NEQ(expected, actual) \
+        ATTEST_INT_CHECK_(expected, actual, "ATTEST_INT_NEQ", !=)
 
 #endif /* H_ATTEST_CHECKS_H */
 
