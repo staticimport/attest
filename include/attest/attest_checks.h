@@ -57,10 +57,10 @@ void attest_clear_test_errors();
           if (!(exp_ check act_)) { \
             attest_test_error_t* error = attest_add_test_error(); \
             if (error) { \
-              sprintf(error->text, ATTEST_TEST_ERROR_TEXT_LIMIT, \
-                      "FAIL: %s(expected \"%s\" = %lld, actual \"%s\" = %lld) at %s:%d", \
-                      check_name, #expected, (long long int)exp_, #actual, (long long int)act_, \
-                      __FILE__, __LINE__); \
+              snprintf(error->text, ATTEST_TEST_ERROR_TEXT_LIMIT, \
+                       "FAIL: %s(expected \"%s\" = %lld, actual \"%s\" = %lld) at %s:%d", \
+                       check_name, #expected, (long long int)exp_, #actual, (long long int)act_, \
+                       __FILE__, __LINE__); \
             } \
           } \
         } while (0)
