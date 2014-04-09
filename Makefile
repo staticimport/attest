@@ -1,11 +1,10 @@
 
 # Environment
-CC         = gcc
-EXEC_DIR   = lib
+EXEC_DIR   = bin
 OBJECT_DIR = build
 
 # Compilation Flags
-COMPILE_FLAGS := -ggdb3 -pipe -pthread -ansi -pedantic -Wall -Wextra -Werror -O2\
+COMPILE_FLAGS := -ggdb3 -pipe -pedantic -Wall -Wextra -Werror -O2\
                  -Iinclude
 
 # Callable variables (i.e. functions)
@@ -29,7 +28,7 @@ MAIN_TARGET_LIBRARY := $(EXEC_DIR)/libattest.a
 # Test
 TEST_IMPL_FILES = $(call find_in_dir_with_suffix,test/,c)
 TEST_OBJECTS = $(addprefix $(OBJECT_DIR)/test/,$(subst test/,,$(TEST_IMPL_FILES:.c=.o)))
-TEST_EXE = bin/test-all
+TEST_EXE = test/bin/test-all
 
 all: $(TEST_EXE) $(MAIN_TARGET_LIBRARY) main_init 
 
@@ -50,6 +49,7 @@ $(OBJECT_DIR)/test/%.o: Makefile | main_init
 	@$(call echo_and_execute,$(call compile,test/$*.c,test/$*.o))
 
 $(TEST_EXE): $(TEST_OBJECTS) $(MAIN_TARGET_LIBRARY)
+	@mkdir -p $(dir $(TEST_EXE))
 	$(CC) $(COMPILE_FLAGS) $(MAIN_TARGET_LIBRARY) $(TEST_OBJECTS) -o $(TEST_EXE)
 
 %.d:
