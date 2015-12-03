@@ -18,8 +18,8 @@ typedef struct attest_test_error_set {
 
 extern attest_test_error_set_t ATTEST_CURRENT_TEST_ERROR_SET;
 
-attest_test_error_t* attest_add_test_error();
-void attest_clear_test_errors();
+attest_test_error_t* attest_add_test_error(void);
+void attest_clear_test_errors(void);
 
 #define ATTEST_CHECK_(expected, actual, check_name, passed) \
         do { \
