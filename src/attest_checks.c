@@ -9,7 +9,7 @@ static attest_test_error_t* ATTEST_TEST_ERROR_FREE_LIST = NULL;
 
 static int ATTEST_MAX_ERRORS_PER_TEST = 10;
 
-attest_test_error_t* attest_add_test_error()
+attest_test_error_t* attest_add_test_error(void)
 {
   attest_test_error_t* error;
   if (ATTEST_CURRENT_TEST_ERROR_SET.error_count == ATTEST_MAX_ERRORS_PER_TEST)
@@ -30,7 +30,7 @@ attest_test_error_t* attest_add_test_error()
   return error;
 }
 
-void attest_clear_test_errors()
+void attest_clear_test_errors(void)
 {
   ATTEST_CURRENT_TEST_ERROR_SET.error_count = 0;
   if (ATTEST_CURRENT_TEST_ERROR_SET.error_list_front) {
