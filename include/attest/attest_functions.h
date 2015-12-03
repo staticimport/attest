@@ -22,7 +22,7 @@ extern unsigned ATTEST_NEXT_TEST_INFO_INDEX;
   } \
   void attest_test_##suitename##_##testname()
 
-void attest_all();
+void attest_all(void);
 
 #endif /* H_ATTEST_FUNCTIONS_H */
 
